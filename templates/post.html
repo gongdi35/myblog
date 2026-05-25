@@ -3,20 +3,20 @@
 {% block title %}{{ post.title }} — 闲笔{% endblock %}
 
 {% block content %}
-<article class="post-detail">
-    <header class="post-detail-header">
+<article class="post-detail shell">
+    <header class="post-detail-header reveal">
         <h1>{{ post.title }}</h1>
         <p class="post-meta">
-            {{ post.date }}
+            <span class="meta-chip">{{ post.date }}</span>
         </p>
     </header>
 
-    <div class="post-content">
+    <div class="post-content reveal">
         {{ post.content | safe }}
     </div>
 
-    <div class="post-actions">
-        <a href="{{ base_path }}/index.html" class="btn btn-secondary">&#8592; 返回文章列表</a>
+    <div class="post-actions reveal">
+        <a href="{{ base_path }}/index.html" class="button">&#8592; 返回文章列表</a>
     </div>
 </article>
 {% endblock %}

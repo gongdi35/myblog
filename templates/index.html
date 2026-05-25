@@ -3,33 +3,90 @@
 {% block title %}文章 — 闲笔{% endblock %}
 
 {% block content %}
-<div class="page-header">
-    <h1>文章</h1>
-    <p class="page-subtitle">静心阅读，随心记录</p>
-</div>
-
-{% if posts %}
-    <div class="post-list">
-        {% for post in posts %}
-        <article class="post-card">
-            <h2>
-                <a href="{{ base_path }}/post/{{ post.slug }}.html">{{ post.title }}</a>
-            </h2>
-            <p class="post-meta">{{ post.date }}</p>
-            <p class="post-excerpt">{{ post.excerpt }}</p>
-            <div class="post-actions">
-                <a href="{{ base_path }}/post/{{ post.slug }}.html" class="btn btn-primary">阅读全文</a>
+<!-- Hero -->
+<section class="hero shell" id="home">
+    <div class="hero-panel reveal">
+        <div class="hero-copy">
+            <span class="eyebrow">独立技术写作 · 笔记与思考</span>
+            <h1>写技术，也写思考。</h1>
+            <p>
+                这里记录前端工程、AI 工作流、产品判断与独立创作。页面保持克制，
+                让内容、结构与语言本身成为主角。
+            </p>
+            <div class="hero-actions">
+                <a href="#latest" class="button primary">浏览最新文章</a>
             </div>
+        </div>
+
+        <div class="hero-side">
+            <section class="panel profile-card" aria-label="博客简介">
+                <div class="profile-top">
+                    <div class="avatar" aria-hidden="true">闲</div>
+                    <div class="status">静心写作，持续输出</div>
+                </div>
+                <div>
+                    <div class="profile-name">闲笔</div>
+                    <div class="profile-role">独立技术博客 · 记录与沉淀</div>
+                </div>
+                <div class="stat-grid">
+                    <div class="stat">
+                        <span class="stat-value">{{ posts | length }}</span>
+                        <span class="stat-kicker">ESSAYS</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">TECH</span>
+                        <span class="stat-kicker">FOCUS</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">∞</span>
+                        <span class="stat-kicker">BUILDING</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel now-card" aria-label="当前状态">
+                <p class="tiny-title">NOW</p>
+                <p>
+                    持续研究与记录：前端工程、AI 工具链、产品设计思考。
+                    让写作成为思考的延伸，让博客成为数字名片。
+                </p>
+            </section>
+        </div>
+    </div>
+</section>
+
+<!-- Article List -->
+<section class="section shell" id="latest">
+    <div class="section-header reveal">
+        <div>
+            <h2 class="section-title">最新文章</h2>
+            <p class="section-note">
+                保持简洁的时间流结构，快速感知最近在关注什么、正在写什么。
+            </p>
+        </div>
+    </div>
+
+    {% if posts %}
+    <div class="timeline">
+        {% for post in posts %}
+        <article class="timeline-item reveal">
+            <div class="timeline-date">{{ post.date }}</div>
+            <div>
+                <h3><a href="{{ base_path }}/post/{{ post.slug }}.html">{{ post.title }}</a></h3>
+                <p>{{ post.excerpt }}</p>
+            </div>
+            <a href="{{ base_path }}/post/{{ post.slug }}.html" class="timeline-arrow" aria-hidden="true">→</a>
         </article>
         {% endfor %}
     </div>
-{% else %}
-    <div class="empty-state">
+    {% else %}
+    <div class="empty-state reveal">
         <span class="empty-state-icon">&#9998;</span>
         <p>尚无文章。</p>
-        <p style="color: var(--text-faint); font-size: 0.82rem; margin-top: 8px;">
+        <p style="font-size:.85rem; color:var(--muted);">
             在 posts/ 目录创建 .md 文件，推送后自动发布。
         </p>
     </div>
-{% endif %}
+    {% endif %}
+</section>
 {% endblock %}
