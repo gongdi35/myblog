@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %}posts — myblog{% endblock %}
+{% block title %}文章 — 闲笔{% endblock %}
 
 {% block content %}
 <div class="page-header">
-    <h1>文章列表</h1>
+    <h1>所有文章</h1>
 </div>
 
 {% if posts %}
@@ -17,16 +17,16 @@
             <p class="post-meta">{{ post.date }}</p>
             <p class="post-excerpt">{{ post.excerpt }}</p>
             <div class="post-actions">
-                <a href="{{ base_path }}/post/{{ post.slug }}.html" class="btn btn-primary">read →</a>
+                <a href="{{ base_path }}/post/{{ post.slug }}.html" class="btn btn-primary">阅读</a>
             </div>
         </article>
         {% endfor %}
     </div>
 {% else %}
     <div class="empty-state">
-        <p>no posts yet.</p>
-        <p style="color: var(--text-dim); font-size: 0.8rem; margin-top: 8px;">
-            在 posts/ 目录下创建 .md 文件，然后 git push 即可自动发布。
+        <p>尚无文章。</p>
+        <p style="color: var(--text-faint); font-size: 0.8rem; margin-top: 6px;">
+            在 posts/ 目录创建 .md 文件，推送后自动发布。
         </p>
     </div>
 {% endif %}

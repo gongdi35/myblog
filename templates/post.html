@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 
-{% block title %}{{ post.title }} — myblog{% endblock %}
+{% block title %}{{ post.title }} — 闲笔{% endblock %}
 
 {% block content %}
 <article class="post-detail">
     <h1>{{ post.title }}</h1>
-    <p class="post-meta">{{ post.date }}</p>
+    <p class="post-meta" style="margin-bottom: 32px;">{{ post.date }}</p>
 
     <div class="post-content">
         {{ post.content | safe }}
     </div>
 
-    <div class="post-actions" style="margin-top: 32px;">
-        <a href="{{ base_path }}/index.html" class="btn btn-secondary">← cd ../</a>
+    <div class="post-actions" style="margin-top: 40px;">
+        <a href="{{ base_path }}/index.html" class="btn btn-secondary">← 返回文章列表</a>
     </div>
 </article>
 {% endblock %}
