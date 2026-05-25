@@ -3,16 +3,13 @@
 # 博客一键部署脚本 - 在 PythonAnywhere Bash 终端中运行
 #
 # 使用方法：
-#   1. 注册 PythonAnywhere，打开 Bash 终端
-#   2. 复制下面这一行命令执行：
+#   在 PythonAnywhere Bash 终端中执行：
 #      bash <(curl -s https://raw.githubusercontent.com/gongdi35/myblog/main/deploy_pa.sh)
-#
-#   或者手动步骤（见下方）
 # ============================================================================
 
-# 你的 GitHub 仓库
 REPO="git@github.com:gongdi35/myblog.git"
 PROJECT_DIR="$HOME/blog"
+PA_USERNAME="kevin1q88"
 
 echo "============================================"
 echo "  🚀 博客一键部署 - PythonAnywhere"
