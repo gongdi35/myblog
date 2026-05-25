@@ -4,15 +4,19 @@
 
 {% block content %}
 <article class="post-detail">
-    <h1>{{ post.title }}</h1>
-    <p class="post-meta" style="margin-bottom: 32px;">{{ post.date }}</p>
+    <header class="post-detail-header">
+        <h1>{{ post.title }}</h1>
+        <p class="post-meta">
+            {{ post.date }}
+        </p>
+    </header>
 
     <div class="post-content">
         {{ post.content | safe }}
     </div>
 
-    <div class="post-actions" style="margin-top: 40px;">
-        <a href="{{ base_path }}/index.html" class="btn btn-secondary">← 返回文章列表</a>
+    <div class="post-actions">
+        <a href="{{ base_path }}/index.html" class="btn btn-secondary">&#8592; 返回文章列表</a>
     </div>
 </article>
 {% endblock %}

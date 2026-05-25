@@ -4,7 +4,8 @@
 
 {% block content %}
 <div class="page-header">
-    <h1>所有文章</h1>
+    <h1>文章</h1>
+    <p class="page-subtitle">静心阅读，随心记录</p>
 </div>
 
 {% if posts %}
@@ -17,15 +18,16 @@
             <p class="post-meta">{{ post.date }}</p>
             <p class="post-excerpt">{{ post.excerpt }}</p>
             <div class="post-actions">
-                <a href="{{ base_path }}/post/{{ post.slug }}.html" class="btn btn-primary">阅读</a>
+                <a href="{{ base_path }}/post/{{ post.slug }}.html" class="btn btn-primary">阅读全文</a>
             </div>
         </article>
         {% endfor %}
     </div>
 {% else %}
     <div class="empty-state">
+        <span class="empty-state-icon">&#9998;</span>
         <p>尚无文章。</p>
-        <p style="color: var(--text-faint); font-size: 0.8rem; margin-top: 6px;">
+        <p style="color: var(--text-faint); font-size: 0.82rem; margin-top: 8px;">
             在 posts/ 目录创建 .md 文件，推送后自动发布。
         </p>
     </div>
