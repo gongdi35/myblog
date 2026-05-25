@@ -1,0 +1,58 @@
+{#============================================================================
+    index.html - 首页：文章列表
+    继承自 base.html，填充 content 块
+    
+    Jinja2 语法说明：
+    {% extends "base.html" %}  = 继承基础模板
+    {% for post in posts %}    = Python 的 for 循环
+    {{ post.title }}           = 输出变量
+    {% endfor %}               = 结束循环
+    {% if xxx %}               = Python 的 if 判断
+    post.content[:200]        = Python 切片，取前 200 字符
+============================================================================#}
+{% extends "base.html" %}
+
+{% block title %}首页 - 我的博客{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>所有文章</h1>
+</div>
+
+{% if posts %}
+    {# 有文章：显示文章卡片列表 #}
+    <div class="post-list">
+        {% for post in posts %}
+        <article class="post-card">
+            <h2>
+                <a href="{{ url_for('view_post', post_id=post.id) }}">{{ post.title }}</a>
+            </h2>
+            <p class="post-meta">
+                📅 创建于 {{ post.created_at }}
+                {% if post.updated_at != post.created_at %}
+                    · ✏️ 更新于 {{ post.updated_at }}
+                {% endif %}
+            </p>
+            <p class="post-excerpt">
+                {{ post.content[:200] }}{% if post.content|length > 200 %}...{% endif %}
+            </p>
+            <div class="post-actions">
+                <a href="{{ url_for('view_post', post_id=post.id) }}" class="btn btn-primary">阅读全文</a>
+                <a href="{{ url_for('edit_page', post_id=post.id) }}" class="btn btn-secondary">编辑</a>
+                <a href="{{ url_for('delete_post', post_id=post.id) }}"
+                   class="btn btn-danger"
+                   onclick="return confirm('确定要删除《{{ post.title }}》吗？')">
+                    删除
+                </a>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+{% else %}
+    {# 没有文章：显示空状态提示 #}
+    <div class="empty-state">
+        <p>📭 还没有文章，快来写第一篇文章吧！</p>
+        <a href="{{ url_for('create_page') }}" class="btn btn-primary">写文章</a>
+    </div>
+{% endif %}
+{% endblock %}

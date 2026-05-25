@@ -1,0 +1,342 @@
+/*============================================================================
+    style.css - 博客样式表
+    使用 CSS 变量（自定义属性），方便统一修改颜色
+    
+    学习要点：
+    1. CSS 变量（--xxx）: 定义一次，到处使用
+    2. 盒模型: margin(外边距), padding(内边距), border(边框)
+    3. Flexbox: display: flex 用于水平排列
+    4. 响应式: @media 根据屏幕宽度调整布局
+    5. 伪类: :hover 鼠标悬停效果
+============================================================================*/
+
+/* ============================================================
+   CSS 变量 - 颜色主题
+   ============================================================ */
+:root {
+    --primary:       #2563eb;   /* 主色（蓝色） */
+    --primary-hover: #1d4ed8;   /* 主色悬停 */
+    --danger:        #dc2626;   /* 危险色（红色） */
+    --danger-hover:  #b91c1c;   /* 危险色悬停 */
+    --bg:            #f8fafc;   /* 页面背景 */
+    --card-bg:       #ffffff;   /* 卡片背景 */
+    --text:          #1e293b;   /* 主文字色 */
+    --text-light:    #64748b;   /* 次要文字色 */
+    --border:        #e2e8f0;   /* 边框色 */
+    --shadow:        0 1px 3px rgba(0,0,0,0.08); /* 卡片阴影 */
+}
+
+/* ============================================================
+   基础重置 - 消除浏览器默认样式差异
+   ============================================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                 "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ============================================================
+   容器 - 限制内容最大宽度，居中显示
+   ============================================================ */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+}
+
+/* ============================================================
+   顶部导航栏
+   ============================================================ */
+.navbar {
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+}
+
+.logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.nav-links a {
+    color: var(--text);
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.nav-links a:hover {
+    background: var(--bg);
+}
+
+/* ============================================================
+   主体内容区
+   ============================================================ */
+main {
+    flex: 1;          /* 让 main 撑满剩余空间，把 footer 推到底部 */
+    padding: 40px 0;
+}
+
+/* ============================================================
+   文章卡片列表
+   ============================================================ */
+.page-header {
+    margin-bottom: 30px;
+}
+
+.page-header h1 {
+    font-size: 1.75rem;
+}
+
+.post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.post-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: var(--shadow);
+}
+
+.post-card h2 {
+    margin-bottom: 8px;
+}
+
+.post-card h2 a {
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.post-card h2 a:hover {
+    color: var(--primary);
+}
+
+.post-meta {
+    color: var(--text-light);
+    font-size: 0.875rem;
+    margin-bottom: 12px;
+}
+
+.post-excerpt {
+    color: var(--text-light);
+    margin-bottom: 16px;
+}
+
+/* ============================================================
+   文章详情页
+   ============================================================ */
+.post-detail {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+    box-shadow: var(--shadow);
+}
+
+.post-detail h1 {
+    font-size: 1.75rem;
+    margin-bottom: 8px;
+}
+
+.post-detail hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 20px 0;
+}
+
+.post-content {
+    font-size: 1.05rem;
+    line-height: 1.9;
+}
+
+/* ============================================================
+   按钮
+   ============================================================ */
+.btn {
+    display: inline-block;
+    padding: 8px 18px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, opacity 0.2s;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover);
+}
+
+.btn-secondary {
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+    background: var(--border);
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background: var(--danger-hover);
+}
+
+/* 操作按钮组 - 间距 */
+.post-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* ============================================================
+   表单页面
+   ============================================================ */
+.form-page {
+    max-width: 700px;
+}
+
+.form-page h1 {
+    font-size: 1.75rem;
+    margin-bottom: 24px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.2s;
+}
+
+.form-group input[type="text"]:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* ============================================================
+   提示信息
+   ============================================================ */
+.alert {
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+
+.alert-error {
+    background: #fef2f2;
+    color: var(--danger);
+    border: 1px solid #fecaca;
+}
+
+/* ============================================================
+   空状态
+   ============================================================ */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+.empty-state p {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    margin-bottom: 20px;
+}
+
+/* ============================================================
+   页脚
+   ============================================================ */
+footer {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-light);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border);
+}
+
+/* ============================================================
+   响应式 - 小屏幕适配
+   ============================================================ */
+@media (max-width: 600px) {
+    .post-card,
+    .post-detail {
+        padding: 16px;
+    }
+
+    .post-detail h1,
+    .page-header h1,
+    .form-page h1 {
+        font-size: 1.35rem;
+    }
+
+    .post-actions {
+        flex-direction: column;
+    }
+
+    .post-actions .btn {
+        text-align: center;
+    }
+}

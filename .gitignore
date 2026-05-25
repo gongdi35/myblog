@@ -1,0 +1,19 @@
+# SQLite 数据库文件 - 包含你的文章数据，不要上传到 GitHub
+blog.db
+
+# Python 缓存目录
+__pycache__/
+*.pyc
+
+# 虚拟环境
+venv/
+env/
+.venv/
+
+# IDE 配置
+.vscode/
+.idea/
+
+# 系统文件
+.DS_Store
+Thumbs.db
