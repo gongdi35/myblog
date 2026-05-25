@@ -1,41 +1,28 @@
-{#============================================================================
-    base.html - 基础布局模板
-    所有其他页面都会"继承"这个模板
-    
-    学习要点：
-    1. {% block xxx %}...{% endblock %} = 定义可替换的区域
-    2. {{ request.url_for(...) }} = 动态生成 URL，不怕改路由
-    3. url_for 比写死 /create 好：改了路由地址，链接自动更新
-============================================================================#}
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}我的博客{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', path='/style.css') }}">
+    <link rel="stylesheet" href="{{ base_path }}/static/style.css">
 </head>
 <body>
-    {# 顶部导航栏 #}
     <nav class="navbar">
         <div class="container">
-            <a href="{{ url_for('index') }}" class="logo">📝 我的博客</a>
+            <a href="{{ base_path }}/index.html" class="logo">📝 我的博客</a>
             <div class="nav-links">
-                <a href="{{ url_for('index') }}">首页</a>
-                <a href="{{ url_for('create_page') }}">写文章</a>
+                <a href="{{ base_path }}/index.html">首页</a>
             </div>
         </div>
     </nav>
 
-    {# 页面主体内容 - 子模板会填充这里 #}
     <main class="container">
         {% block content %}
         {% endblock %}
     </main>
 
-    {# 底部 #}
     <footer>
-        <p>© 2026 我的博客 · 用 FastAPI + SQLite 构建 · 学习编程的好项目</p>
+        <p>© 2026 我的博客 · 托管于 GitHub Pages · 用 Markdown 写文章</p>
     </footer>
 </body>
 </html>

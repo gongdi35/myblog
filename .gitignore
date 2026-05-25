@@ -1,7 +1,7 @@
-# SQLite 数据库文件 - 包含你的文章数据，不要上传到 GitHub
-blog.db
+# 构建产物 - GitHub Actions 自动生成，不需要提交
+docs/
 
-# Python 缓存目录
+# Python 缓存
 __pycache__/
 *.pyc
 
@@ -10,10 +10,13 @@ venv/
 env/
 .venv/
 
-# IDE 配置
+# IDE
 .vscode/
 .idea/
 
 # 系统文件
 .DS_Store
 Thumbs.db
+
+# 旧的动态博客文件（保留但暂不提交）
+blog.db
