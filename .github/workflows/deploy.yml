@@ -3,14 +3,16 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
-  workflow_dispatch:   # 允许手动触发
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: write
 
     steps:
       - name: Checkout
@@ -25,7 +27,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Build static site
-        run: python build.py
+        run: python3 build.py
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4

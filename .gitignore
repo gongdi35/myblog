@@ -17,6 +17,3 @@ env/
 # 系统文件
 .DS_Store
 Thumbs.db
-
-# 旧的动态博客文件（保留但暂不提交）
-blog.db

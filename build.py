@@ -64,7 +64,7 @@ def build() -> None:
 
         html_content = markdown(
             md_content,
-            extensions=["extra", "fenced_code", "codehilite"],
+            extensions=["extra"],
         )
 
         excerpt = meta.get("excerpt", "")
