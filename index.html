@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章 — 闲笔</title>
+    <link rel="stylesheet" href="./static/style.css">
+</head>
+<body>
+    <header class="topbar" id="topbar">
+        <div class="shell">
+            <nav class="nav" aria-label="主导航">
+                <a class="brand" href="./index.html">
+                    <span class="brand-mark">闲</span>
+                    <span>闲笔</span>
+                </a>
+                <div class="nav-links">
+                    <a href="./index.html" class="is-active">文章</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        
+<!-- Hero -->
+<section class="hero shell" id="home">
+    <div class="hero-panel reveal">
+        <div class="hero-copy">
+            <span class="eyebrow">独立技术写作 · 笔记与思考</span>
+            <h1>写技术，也写思考。</h1>
+            <p>
+                这里记录前端工程、AI 工作流、产品判断与独立创作。页面保持克制，
+                让内容、结构与语言本身成为主角。
+            </p>
+            <div class="hero-actions">
+                <a href="#latest" class="button primary">浏览最新文章</a>
+            </div>
+        </div>
+
+        <div class="hero-side">
+            <section class="panel profile-card" aria-label="博客简介">
+                <div class="profile-top">
+                    <div class="avatar" aria-hidden="true">闲</div>
+                    <div class="status">静心写作，持续输出</div>
+                </div>
+                <div>
+                    <div class="profile-name">闲笔</div>
+                    <div class="profile-role">独立技术博客 · 记录与沉淀</div>
+                </div>
+                <div class="stat-grid">
+                    <div class="stat">
+                        <span class="stat-value">2</span>
+                        <span class="stat-kicker">ESSAYS</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">TECH</span>
+                        <span class="stat-kicker">FOCUS</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">∞</span>
+                        <span class="stat-kicker">BUILDING</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel now-card" aria-label="当前状态">
+                <p class="tiny-title">NOW</p>
+                <p>
+                    持续研究与记录：前端工程、AI 工具链、产品设计思考。
+                    让写作成为思考的延伸，让博客成为数字名片。
+                </p>
+            </section>
+        </div>
+    </div>
+</section>
+
+<!-- Article List -->
+<section class="section shell" id="latest">
+    <div class="section-header reveal">
+        <div>
+            <h2 class="section-title">最新文章</h2>
+            <p class="section-note">
+                保持简洁的时间流结构，快速感知最近在关注什么、正在写什么。
+            </p>
+        </div>
+    </div>
+
+    
+    <div class="timeline">
+        
+        <article class="timeline-item reveal">
+            <div class="timeline-date">2026-05-25</div>
+            <div>
+                <h3><a href="./post/个人生产力.html">个人生产力</a></h3>
+                <p>今天才偶然发现有了大模型+Agent的助力后，个人生产空前的得到了极大的提升。</p>
+            </div>
+            <a href="./post/个人生产力.html" class="timeline-arrow" aria-hidden="true">→</a>
+        </article>
+        
+        <article class="timeline-item reveal">
+            <div class="timeline-date">2026-05-25</div>
+            <div>
+                <h3><a href="./post/my-first-post.html">第一篇文章</a></h3>
+                <p>这是我用 Vibecoding 的方式自建博客的第一篇文章，很开心。</p>
+            </div>
+            <a href="./post/my-first-post.html" class="timeline-arrow" aria-hidden="true">→</a>
+        </article>
+        
+    </div>
+    
+</section>
+
+    </main>
+
+    <footer class="footer shell">
+        <div class="footer-panel reveal">
+            <p>© <span id="year"></span> 闲笔 · 静心写作 · 托管于 GitHub Pages</p>
+        </div>
+    </footer>
+
+    <script>
+        /* ---- Scroll-aware topbar ---- */
+        (function() {
+            var topbar = document.getElementById("topbar");
+            var ticking = false;
+            function update() {
+                if (window.scrollY > 12) {
+                    topbar.classList.add("is-scrolled");
+                } else {
+                    topbar.classList.remove("is-scrolled");
+                }
+                ticking = false;
+            }
+            window.addEventListener("scroll", function() {
+                if (!ticking) { requestAnimationFrame(update); ticking = true; }
+            });
+            update();
+        })();
+
+        /* ---- Year ---- */
+        document.getElementById("year").textContent = new Date().getFullYear();
+
+        /* ---- Reveal on scroll ---- */
+        (function() {
+            var reveals = document.querySelectorAll(".reveal");
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("is-visible");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.14 });
+            reveals.forEach(function(item) { observer.observe(item); });
+        })();
+    </script>
+</body>
+</html>
