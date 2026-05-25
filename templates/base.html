@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}我的博客{% endblock %}</title>
+    <title>{% block title %}myblog{% endblock %}</title>
     <link rel="stylesheet" href="{{ base_path }}/static/style.css">
 </head>
 <body>
     <nav class="navbar">
         <div class="container">
-            <a href="{{ base_path }}/index.html" class="logo">📝 我的博客</a>
+            <a href="{{ base_path }}/index.html" class="logo">myblog</a>
             <div class="nav-links">
-                <a href="{{ base_path }}/index.html">首页</a>
+                <a href="{{ base_path }}/index.html">/posts</a>
             </div>
         </div>
     </nav>
@@ -22,7 +22,7 @@
     </main>
 
     <footer>
-        <p>© 2026 我的博客 · 托管于 GitHub Pages · 用 Markdown 写文章</p>
+        <p>built with markdown · deployed on github pages</p>
     </footer>
 </body>
 </html>

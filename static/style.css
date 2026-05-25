@@ -1,342 +1,266 @@
 /*============================================================================
-    style.css - 博客样式表
-    使用 CSS 变量（自定义属性），方便统一修改颜色
-    
-    学习要点：
-    1. CSS 变量（--xxx）: 定义一次，到处使用
-    2. 盒模型: margin(外边距), padding(内边距), border(边框)
-    3. Flexbox: display: flex 用于水平排列
-    4. 响应式: @media 根据屏幕宽度调整布局
-    5. 伪类: :hover 鼠标悬停效果
+    style.css - 科技极简博客样式
+    深色终端风格 · 青色点缀 · 等宽字体 · 扁平无卡片
 ============================================================================*/
 
-/* ============================================================
-   CSS 变量 - 颜色主题
-   ============================================================ */
+/* ---- CSS 变量 ---- */
 :root {
-    --primary:       #2563eb;   /* 主色（蓝色） */
-    --primary-hover: #1d4ed8;   /* 主色悬停 */
-    --danger:        #dc2626;   /* 危险色（红色） */
-    --danger-hover:  #b91c1c;   /* 危险色悬停 */
-    --bg:            #f8fafc;   /* 页面背景 */
-    --card-bg:       #ffffff;   /* 卡片背景 */
-    --text:          #1e293b;   /* 主文字色 */
-    --text-light:    #64748b;   /* 次要文字色 */
-    --border:        #e2e8f0;   /* 边框色 */
-    --shadow:        0 1px 3px rgba(0,0,0,0.08); /* 卡片阴影 */
+    --bg:          #0d1117;
+    --bg-alt:      #161b22;
+    --text:        #c9d1d9;
+    --text-dim:    #8b949e;
+    --accent:      #00d4aa;
+    --accent-dim:  #00997a;
+    --border:      #30363d;
+    --font-mono:   "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono",
+                   "Source Code Pro", "Consolas", "Courier New", monospace;
+    --font-sans:   -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC",
+                   "PingFang SC", "Microsoft YaHei", sans-serif;
+    --radius:      4px;
+    --max-w:       720px;
 }
 
-/* ============================================================
-   基础重置 - 消除浏览器默认样式差异
-   ============================================================ */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* ---- Reset ---- */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { font-size: 16px; scroll-behavior: smooth; }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-                 "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
-    background-color: var(--bg);
+    font-family: var(--font-sans);
+    background: var(--bg);
     color: var(--text);
-    line-height: 1.7;
+    line-height: 1.75;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-/* ============================================================
-   容器 - 限制内容最大宽度，居中显示
-   ============================================================ */
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 20px;
-    width: 100%;
-}
+/* ---- Container ---- */
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 20px; width: 100%; }
 
-/* ============================================================
-   顶部导航栏
-   ============================================================ */
+/* ---- Navbar ---- */
 .navbar {
-    background: var(--card-bg);
+    background: var(--bg);
     border-bottom: 1px solid var(--border);
-    box-shadow: var(--shadow);
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    position: sticky; top: 0; z-index: 100;
+    backdrop-filter: blur(12px);
 }
 
 .navbar .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 20px;
+    padding: 18px 0;
 }
 
 .logo {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--primary);
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--accent);
     text-decoration: none;
+    letter-spacing: 0.5px;
 }
+.logo::before { content: "> "; opacity: 0.5; }
+
+.nav-links { display: flex; gap: 4px; }
 
 .nav-links a {
-    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-dim);
     text-decoration: none;
-    padding: 8px 16px;
-    border-radius: 6px;
-    transition: background 0.2s;
+    padding: 6px 12px;
+    border-radius: var(--radius);
+    transition: color 0.2s, background 0.2s;
 }
+.nav-links a:hover { color: var(--accent); background: var(--bg-alt); }
 
-.nav-links a:hover {
-    background: var(--bg);
-}
+/* ---- Main ---- */
+main { flex: 1; padding: 48px 0; }
 
-/* ============================================================
-   主体内容区
-   ============================================================ */
-main {
-    flex: 1;          /* 让 main 撑满剩余空间，把 footer 推到底部 */
-    padding: 40px 0;
-}
-
-/* ============================================================
-   文章卡片列表
-   ============================================================ */
-.page-header {
-    margin-bottom: 30px;
-}
+/* ---- Page Header ---- */
+.page-header { margin-bottom: 36px; }
 
 .page-header h1 {
-    font-size: 1.75rem;
+    font-family: var(--font-mono);
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--text-dim);
 }
+.page-header h1::before { content: "// "; color: var(--accent); }
 
-.post-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
+/* ---- Post List ---- */
+.post-list { display: flex; flex-direction: column; gap: 0; }
 
 .post-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 24px;
-    box-shadow: var(--shadow);
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border);
 }
+.post-card:first-child { padding-top: 0; }
+.post-card:last-child { border-bottom: none; }
 
-.post-card h2 {
-    margin-bottom: 8px;
-}
+.post-card h2 { margin-bottom: 6px; }
 
 .post-card h2 a {
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    font-weight: 500;
     color: var(--text);
     text-decoration: none;
     transition: color 0.2s;
 }
-
-.post-card h2 a:hover {
-    color: var(--primary);
-}
+.post-card h2 a:hover { color: var(--accent); }
 
 .post-meta {
-    color: var(--text-light);
-    font-size: 0.875rem;
-    margin-bottom: 12px;
+    font-family: var(--font-mono);
+    font-size: 0.725rem;
+    color: var(--text-dim);
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
 
 .post-excerpt {
-    color: var(--text-light);
-    margin-bottom: 16px;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    line-height: 1.65;
+    margin-bottom: 12px;
 }
 
-/* ============================================================
-   文章详情页
-   ============================================================ */
-.post-detail {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 32px;
-    box-shadow: var(--shadow);
+/* ---- Buttons ---- */
+.btn {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    padding: 6px 16px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
 }
+
+.btn-primary {
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+}
+.btn-primary:hover { background: var(--accent); color: var(--bg); }
+
+.btn-secondary {
+    background: transparent;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+}
+.btn-secondary:hover { color: var(--text); border-color: var(--text-dim); }
+
+.post-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* ---- Post Detail ---- */
+.post-detail { max-width: var(--max-w); }
 
 .post-detail h1 {
-    font-size: 1.75rem;
+    font-family: var(--font-mono);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--accent);
     margin-bottom: 8px;
+    line-height: 1.4;
 }
+.post-detail h1::before { content: "# "; opacity: 0.4; }
 
 .post-detail hr {
     border: none;
     border-top: 1px solid var(--border);
-    margin: 20px 0;
+    margin: 24px 0;
 }
 
 .post-content {
-    font-size: 1.05rem;
-    line-height: 1.9;
-}
-
-/* ============================================================
-   按钮
-   ============================================================ */
-.btn {
-    display: inline-block;
-    padding: 8px 18px;
-    border: none;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background 0.2s, opacity 0.2s;
-}
-
-.btn-primary {
-    background: var(--primary);
-    color: #fff;
-}
-
-.btn-primary:hover {
-    background: var(--primary-hover);
-}
-
-.btn-secondary {
-    background: var(--bg);
-    color: var(--text);
-    border: 1px solid var(--border);
-}
-
-.btn-secondary:hover {
-    background: var(--border);
-}
-
-.btn-danger {
-    background: var(--danger);
-    color: #fff;
-}
-
-.btn-danger:hover {
-    background: var(--danger-hover);
-}
-
-/* 操作按钮组 - 间距 */
-.post-actions {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-/* ============================================================
-   表单页面
-   ============================================================ */
-.form-page {
-    max-width: 700px;
-}
-
-.form-page h1 {
-    font-size: 1.75rem;
-    margin-bottom: 24px;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 6px;
-}
-
-.form-group input[type="text"],
-.form-group textarea {
-    width: 100%;
-    padding: 10px 14px;
-    border: 1px solid var(--border);
-    border-radius: 6px;
     font-size: 1rem;
-    font-family: inherit;
-    transition: border-color 0.2s;
+    line-height: 1.85;
+    color: var(--text);
 }
 
-.form-group input[type="text"]:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+/* Typography in post content */
+.post-content h1, .post-content h2, .post-content h3,
+.post-content h4, .post-content h5, .post-content h6 {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    margin: 32px 0 12px;
 }
-
-.form-actions {
-    display: flex;
-    gap: 10px;
+.post-content h2 { font-size: 1.15rem; }
+.post-content h3 { font-size: 1rem; }
+.post-content p { margin-bottom: 16px; }
+.post-content a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-dim); }
+.post-content a:hover { border-color: var(--accent); }
+.post-content ul, .post-content ol { padding-left: 24px; margin-bottom: 16px; }
+.post-content li { margin-bottom: 4px; }
+.post-content blockquote {
+    border-left: 3px solid var(--accent);
+    padding: 8px 16px;
+    margin: 16px 0;
+    color: var(--text-dim);
+    background: var(--bg-alt);
+    border-radius: 0 var(--radius) var(--radius) 0;
 }
-
-/* ============================================================
-   提示信息
-   ============================================================ */
-.alert {
-    padding: 12px 16px;
-    border-radius: 6px;
-    margin-bottom: 20px;
-    font-size: 0.9rem;
+.post-content code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background: var(--bg-alt);
+    padding: 2px 6px;
+    border-radius: var(--radius);
+    color: var(--accent);
 }
-
-.alert-error {
-    background: #fef2f2;
-    color: var(--danger);
-    border: 1px solid #fecaca;
+.post-content pre {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    overflow-x: auto;
+    margin: 16px 0;
+    font-size: 0.85rem;
+    line-height: 1.55;
 }
+.post-content pre code {
+    background: none;
+    padding: 0;
+    color: var(--text);
+}
+.post-content strong { color: #f0f6fc; font-weight: 600; }
+.post-content img { max-width: 100%; border-radius: var(--radius); margin: 16px 0; }
 
-/* ============================================================
-   空状态
-   ============================================================ */
+/* ---- Empty State ---- */
 .empty-state {
     text-align: center;
-    padding: 60px 20px;
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 8px;
+    padding: 80px 20px;
+    border: 1px dashed var(--border);
+    border-radius: var(--radius);
 }
-
 .empty-state p {
-    font-size: 1.1rem;
-    color: var(--text-light);
-    margin-bottom: 20px;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    margin-bottom: 8px;
 }
 
-/* ============================================================
-   页脚
-   ============================================================ */
+/* ---- Footer ---- */
 footer {
     text-align: center;
-    padding: 20px;
-    color: var(--text-light);
-    font-size: 0.85rem;
+    padding: 24px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-dim);
     border-top: 1px solid var(--border);
+    letter-spacing: 0.3px;
 }
+footer::before { content: "λ "; color: var(--accent); }
 
-/* ============================================================
-   响应式 - 小屏幕适配
-   ============================================================ */
+/* ---- Responsive ---- */
 @media (max-width: 600px) {
-    .post-card,
-    .post-detail {
-        padding: 16px;
-    }
-
-    .post-detail h1,
-    .page-header h1,
-    .form-page h1 {
-        font-size: 1.35rem;
-    }
-
-    .post-actions {
-        flex-direction: column;
-    }
-
-    .post-actions .btn {
-        text-align: center;
-    }
+    .post-detail h1 { font-size: 1.2rem; }
+    .post-card h2 a { font-size: 0.95rem; }
+    .post-content { font-size: 0.95rem; }
+    .post-actions { flex-direction: column; }
+    .post-actions .btn { text-align: center; }
 }
